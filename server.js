@@ -49,6 +49,16 @@ app.get("/reserve", function(req, res) {
   res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
+app.get("/api/curTables", function(req, res) {
+  // res.send("Welcome to the Star Wars Page!")
+  res.json(dinerInfo);
+});
+
+app.get("/api/waitlistTables", function(req, res) {
+  // res.send("Welcome to the Star Wars Page!")
+  res.json(waitlistInfo);
+});
+
 app.post("/api/makeRes", function(req, res) {
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware

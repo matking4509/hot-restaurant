@@ -36,7 +36,7 @@ app.use(express.json());
 
 app.get("/", function(req, res) {
     // res.send("Welcome to the Star Wars Page!")
-    res.sendFile(path.join(__dirname, "home.html"));
+    res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.get("/tables", function(req, res) {
@@ -66,7 +66,7 @@ app.post("/api/makeRes", function(req, res) {
       var waitlistRes = req.body;
       waitlistInfo.push(waitlistRes);
       console.log("waitlist",waitlistRes);
-      res.sendFile(path.join(__dirname, "fullup.html"));
+      res.sendFile(path.join(__dirname, "error404.html"));
     } else {
       var newRes = req.body;
       
@@ -85,7 +85,8 @@ app.post("/api/makeRes", function(req, res) {
     res.json(dinerInfo);
     // res.json(waitlistInfo);
 });
-  
+
+
   // Starts the server to begin listening
   // =============================================================
   app.listen(PORT, function() {

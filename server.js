@@ -9,12 +9,13 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 var dinerInfo = [
-  {
-    name: "Test",
-    phone: "888-123-4586",
-    email: "test@test.com",
-    table: 1
-  },
+  // Test User Format
+  // {
+  //   name: "Test",
+  //   phone: "888-123-4586",
+  //   email: "test@test.com",
+  //   table: 1
+  // },
   
 ];
 // Sets up the Express app to handle data parsing
@@ -24,6 +25,15 @@ app.use(express.json());
 app.get("/", function(req, res) {
     // res.send("Welcome to the Star Wars Page!")
     res.sendFile(path.join(__dirname, "home.html"));
+});
+
+app.get("/reservations", function(req, res) {
+  // res.send("Welcome to the Star Wars Page!")
+  res.sendFile(path.join(__dirname, "tables.html"));
+});
+app.get("/reservations", function(req, res) {
+  // res.send("Welcome to the Star Wars Page!")
+  res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
 app.post("/api/makeRes", function(req, res) {

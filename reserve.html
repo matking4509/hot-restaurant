@@ -55,10 +55,6 @@
                                 <label for="reserve-email">Email</label>
                                 <input type="text" class="form-control" id="reserve-email">
                             </div>
-                            <div class="form-group">
-                                <label for="reserve-unique-id">Unique ID</label>
-                                <input type="text" class="form-control" id="reserve-unique-id">
-                            </div>
                             <button type="submit" class="btn btn-primary submit">Submit</button>
                         </form>
                     </div>
@@ -76,7 +72,22 @@
         </footer>
     </div>
     <script type="text/javascript">
-
+        $(".submit").on("click", function(event) {
+            event.preventDefault();
+            var newReservation = {
+                name: $("#reserve-name").val().trim(),
+                phone: $("#reserve-phone").val().trim(),
+                email: $("#reserve-email").val().trim(),
+            }
+            console.log(newReservation);
+            $.post("api/makeRes", newReservation,
+            function(data) {
+                console.log(data);
+                $("#reserve-name").val("");
+                $("#reserve-phone").val("");
+                $("#reserve-email").val("");
+            });
+        });
     </script>
 </body>
 </html>

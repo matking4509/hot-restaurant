@@ -87,10 +87,10 @@ function randomTable() {
     var randomTableNum = Math.floor(Math.random() * maxTables + 1);
   //   newRes.table = randomTable;
     if (dinerInfo.some(e => e.table === randomTableNum)) { 
-      console.log("Nope. Trying Again");  
+      // console.log("Nope. Trying Again");  
       randomTable();
     } else {
-      console.log("random okay");
+      // console.log("random okay");
       // return randomTableNum;
       rTn = randomTableNum;
     };

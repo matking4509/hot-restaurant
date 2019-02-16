@@ -9,6 +9,7 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 var maxTables = 5;
+var rTn = '';
 var dinerInfo = [
   // Test User Format
   // {
@@ -58,6 +59,10 @@ app.post("/api/makeRes", function(req, res) {
       res.sendFile(path.join(__dirname, "fullup.html"));
     } else {
       var newRes = req.body;
+      
+      // Randomly Select Table
+      randomTable();
+      newRes.table = rTn;
       console.log("reserved",newRes);
     
       // We then add the json the user sent to the character array
@@ -77,11 +82,14 @@ app.post("/api/makeRes", function(req, res) {
 
 function randomTable() {
   // Random Table
-    // var randomTable = Math.floor(Math.random() * maxTables);
-    // newRes.table = randomTable;
-    // dinerInfo.forEach(function(element) {
-    //   if (element.table === randomTable) {
-    //     return 1;
-    //   }
-    // });
+    var randomTableNum = Math.floor(Math.random() * maxTables + 1);
+  //   newRes.table = randomTable;
+    if (dinerInfo.some(e => e.table === randomTableNum)) { 
+      console.log("Nope. Trying Again");  
+      randomTable();
+    } else {
+      console.log("random okay");
+      // return randomTableNum;
+      rTn = randomTableNum;
+    };
 };

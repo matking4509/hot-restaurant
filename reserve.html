@@ -84,6 +84,12 @@
                 $("#reserve-name").val("");
                 $("#reserve-phone").val("");
                 $("#reserve-email").val("");
+
+                console.log("data",data)
+
+                if(data.full === true){
+                    window.location.replace("/error404.html");
+                }
             });
         });
     </script>

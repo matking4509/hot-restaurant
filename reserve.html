@@ -77,12 +77,10 @@
             var newReservation = {
                 name: $("#reserve-name").val().trim(),
                 phone: $("#reserve-phone").val().trim(),
-                email: $("#reserve-email").val().trim(),
+                email: $("#reserve-email").val().trim()
             }
-            console.log(newReservation);
             $.post("api/makeRes", newReservation,
             function(data) {
-                console.log(data);
                 $("#reserve-name").val("");
                 $("#reserve-phone").val("");
                 $("#reserve-email").val("");

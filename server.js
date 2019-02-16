@@ -8,16 +8,27 @@ var path = require("path");
 var app = express();
 var PORT = process.env.PORT || 3000;
 
+var maxTables = 5;
 var dinerInfo = [
   // Test User Format
   // {
   //   name: "Test",
   //   phone: "888-123-4586",
   //   email: "test@test.com",
-  //   table: 1
+  //   table: 1 *** Will Be Calcuated in API before pused to Array ***
   // },
-  
 ];
+
+var waitlistInfo = [
+  // Test User Format
+  // {
+  //   name: "Test",
+  //   phone: "888-123-4586",
+  //   email: "test@test.com",
+  //   table: 1 *** Will Be Calcuated in API before pused to Array ***
+  // },
+];
+
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -27,11 +38,12 @@ app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "home.html"));
 });
 
-app.get("/reservations", function(req, res) {
+app.get("/tables", function(req, res) {
   // res.send("Welcome to the Star Wars Page!")
   res.sendFile(path.join(__dirname, "tables.html"));
 });
-app.get("/reservations", function(req, res) {
+
+app.get("/reserve", function(req, res) {
   // res.send("Welcome to the Star Wars Page!")
   res.sendFile(path.join(__dirname, "reserve.html"));
 });
@@ -39,18 +51,37 @@ app.get("/reservations", function(req, res) {
 app.post("/api/makeRes", function(req, res) {
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware
-    var newRes = req.body;
-    console.log(newRes);
-  
-    // We then add the json the user sent to the character array
-    dinerInfo.push(newRes);
-  
-    // We then display the JSON to the users
-    res.json(dinerInfo);
-  });
+    if (dinerInfo.length >= maxTables) {
+      var waitlistRes = req.body;
+      waitlistInfo.push(waitlistRes);
+      console.log("waitlist",waitlistRes);
+      res.sendFile(path.join(__dirname, "fullup.html"));
+    } else {
+      var newRes = req.body;
+      console.log("reserved",newRes);
+    
+      // We then add the json the user sent to the character array
+      dinerInfo.push(newRes);
+    
+      // We then display the JSON to the users
+      res.json(dinerInfo);
+      res.json(waitlistInfo);
+    }
+});
   
   // Starts the server to begin listening
   // =============================================================
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
 });
+
+function randomTable() {
+  // Random Table
+    // var randomTable = Math.floor(Math.random() * maxTables);
+    // newRes.table = randomTable;
+    // dinerInfo.forEach(function(element) {
+    //   if (element.table === randomTable) {
+    //     return 1;
+    //   }
+    // });
+};

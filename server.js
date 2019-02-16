@@ -69,9 +69,11 @@ app.post("/api/makeRes", function(req, res) {
       dinerInfo.push(newRes);
     
       // We then display the JSON to the users
-      res.json(dinerInfo);
-      res.json(waitlistInfo);
+      
+      
     }
+    res.json(dinerInfo);
+    // res.json(waitlistInfo);
 });
   
   // Starts the server to begin listening

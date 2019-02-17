@@ -36,7 +36,7 @@ app.use(express.json());
 
 app.get("/", function(req, res) {
     // res.send("Welcome to the Star Wars Page!")
-    res.sendFile(path.join(__dirname, "index.html"));
+    res.sendFile(path.join(__dirname, "home.html"));
 });
 
 app.get("/tables", function(req, res) {
@@ -47,6 +47,11 @@ app.get("/tables", function(req, res) {
 app.get("/reserve", function(req, res) {
   // res.send("Welcome to the Star Wars Page!")
   res.sendFile(path.join(__dirname, "reserve.html"));
+});
+
+app.get("/error404", function(req, res) {
+  // res.send("Welcome to the Star Wars Page!")
+  res.sendFile(path.join(__dirname, "error404.html"));
 });
 
 app.get("/api/curTables", function(req, res) {
@@ -65,9 +70,11 @@ app.post("/api/makeRes", function(req, res) {
     if (dinerInfo.length >= maxTables) {
       var waitlistRes = req.body;
       waitlistInfo.push(waitlistRes);
+      
       console.log("waitlist",waitlistRes);
 
-      res.send({"full": true});
+      res.send({"redirect":true});
+
       //res.sendFile(path.join(__dirname, "error404.html"));
     } else {
       var newRes = req.body;
